@@ -23,6 +23,7 @@ class ProductVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     func initProduct(category:Category){
         products = DataService.instance.getProducts(forProductTitle: category.title)
+        navigationItem.title = category.title
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
@@ -34,8 +35,6 @@ class ProductVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductsCell {
             let product = products[indexPath.row]
-            print("Came in cell")
-            print(product)
             cell.updateViews(product: product)
             return cell
         }else{
